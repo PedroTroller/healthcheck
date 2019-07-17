@@ -1,0 +1,33 @@
+# Healthcheck
+
+## Installation
+
+`composer require pedrotroller/healthcheck`
+
+## Symfony integration
+
+### Configuration (coming from Symfony Flex) 
+
+```yaml
+# config/packages/healthcheck.yaml
+healthcheck:
+	detailed: '%kernel.debug%'
+```
+
+```yaml
+# config/routing/healthcheck.yaml
+healthcheck:
+  resource: '@HealthcheckBundle/Resources/config/routing.yaml'
+  prefix: /healthcheck
+```
+
+## Usage
+
+### HTTP
+
+`GET /healthcheck` will return an empty 200 response is the service is available, a 503 else.
+`OPTIONS /healthcheck` will return an empty 200 response if the helthchecking route is available.
+
+### Console
+
+`bin/console healthcheck`

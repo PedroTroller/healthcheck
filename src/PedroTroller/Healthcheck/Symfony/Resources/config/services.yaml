@@ -1,0 +1,45 @@
+---
+parameters:
+  healthcheck.detailed: false
+
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  _instanceof:
+    PedroTroller\Healthcheck\Checker:
+      tags:
+        - healthcheck.checker
+
+
+  PedroTroller\Healthcheck\Symfony\Command\Healthcheck:
+    tags:
+      - console.command
+
+  PedroTroller\Healthcheck\Symfony\Controller\Healthcheck:
+    arguments:
+      $detailed: '%healthcheck.detailed%'
+    tags:
+      - controller.service_arguments
+
+  PedroTroller\Healthcheck\Checkers:
+    $checkers: !tagged healthcheck.checker
+
+  PedroTroller\Healthcheck\Checker\Doctrine:
+    tags:
+      - healthcheck.checker
+
+  PedroTroller\Healthcheck\Checker\Elasticsearch:
+    tags:
+      - healthcheck.checker
+
+  PedroTroller\Healthcheck\Checker\PhpRedis:
+    tags:
+      - healthcheck.checker
+
+  PedroTroller\Healthcheck\Logger:
+    arguments:
+      $logger: '@logger'
+    tags:
+      - { name: monolog.logger, channel: healthcheck }

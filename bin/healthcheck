@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+(function () {
+
+    $cwd = getcwd();
+
+    if ($cwd) {
+        if (is_file($autoload = $cwd . '/vendor/autoload.php')) {
+            require $autoload;
+        } elseif (is_file($autoload = dirname($cwd, 2) . '/autoload.php')) {
+            require $autoload;
+        }
+    }
+
+    if (is_file($autoload = dirname(__DIR__) . '/vendor/autoload.php')) {
+        require($autoload);
+    } elseif (is_file($autoload = dirname(__DIR__, 3) . '/autoload.php')) {
+        require($autoload);
+    } else {
+        fwrite(STDERR, 'No dependencies found, please run `composer install`.');
+
+        exit(1);
+    }
+
+    (new PedroTroller\Healthcheck\Console\Application())->run();
+
+})();

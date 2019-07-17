@@ -1,0 +1,36 @@
+{
+    "name": "pedrotroller/healthcheck",
+    "description": "Check if your application is still working",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pierre PLAZANET",
+            "email": "plazanet.pierre@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "symfony/console": "~4.0"
+    },
+    "require-dev": {
+        "doctrine/dbal": "~2.0",
+        "phpspec/phpspec": "^5.1",
+        "elasticsearch/elasticsearch": "~7.0",
+        "symfony/http-foundation": "~4.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "memio/spec-gen": "^0.9.0",
+        "symfony/http-kernel": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/config": "^4.3",
+        "predis/predis": "^1.1",
+        "pedrotroller/php-cs-custom-fixer": "^2.18",
+        "monolog/monolog": "^1.24"
+    },
+    "autoload": {
+        "psr-4": { "PedroTroller\\Healthcheck\\": "src/PedroTroller/Healthcheck/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\": "spec/" }
+    }
+}

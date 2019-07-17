@@ -1,0 +1,10 @@
+---
+healthcheck_alive:
+  methods: OPTIONS
+  controller: PedroTroller\Healthcheck\Symfony\Controller\Alive
+  path: /
+
+healthcheck_healthcheck:
+  methods: GET
+  controller: PedroTroller\Healthcheck\Symfony\Controller\Healthcheck
+  path: /
