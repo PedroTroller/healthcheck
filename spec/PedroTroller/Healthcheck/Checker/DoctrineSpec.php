@@ -8,13 +8,14 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\Statement;
 use PedroTroller\Healthcheck\Checker;
+use PedroTroller\Healthcheck\Logger;
 use PhpSpec\ObjectBehavior;
 
 class DoctrineSpec extends ObjectBehavior
 {
     function let(Connection $connection)
     {
-        $this->beConstructedWith($connection);
+        $this->beConstructedWith($connection, new Logger(null));
     }
 
     function it_is_initializable()
@@ -25,7 +26,7 @@ class DoctrineSpec extends ObjectBehavior
 
     function it_is_healthy_if_the_request_succeed($connection, Statement $statement)
     {
-        $connection->prepare('SHOW STATUS')->willReturn($statement);
+        $connection->prepare('SELECT 1')->willReturn($statement);
         $statement->execute()->shouldBeCalledTimes(1)->willReturn(true);
 
         $this->check()->shouldReturn(Checker::STATUS_HEALTHY);
@@ -33,7 +34,7 @@ class DoctrineSpec extends ObjectBehavior
 
     function it_is_unhealthy_if_the_request_fails($connection, Statement $statement)
     {
-        $connection->prepare('SHOW STATUS')->willReturn($statement);
+        $connection->prepare('SELECT 1')->willReturn($statement);
         $statement->execute()->willThrow(new ConnectionException());
 
         $this->check()->shouldReturn(Checker::STATUS_UNHEALTHY);
@@ -41,7 +42,7 @@ class DoctrineSpec extends ObjectBehavior
 
     function it_is_excluded_if_there_is_no_doctrine_available()
     {
-        $this->beConstructedWith(null);
+        $this->beConstructedWith(null, new Logger(null));
 
         $this->check()->shouldReturn(Checker::STATUS_EXCLUDED);
     }

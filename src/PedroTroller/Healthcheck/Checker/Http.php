@@ -42,7 +42,7 @@ final class Http implements Checker
         RequestInterface $request,
         Logger $logger,
         int $expectedStatusCode = 200,
-        string $name = null
+        string $name            = null
     ) {
         $this->client             = $client;
         $this->request            = $request;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\PedroTroller\Healthcheck\Checker;
 
 use PedroTroller\Healthcheck\Checker;
+use PedroTroller\Healthcheck\Logger;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -14,7 +15,7 @@ class HttpSpec extends ObjectBehavior
 {
     function let(ClientInterface $client, RequestInterface $request)
     {
-        $this->beConstructedWith($client, $request, 200);
+        $this->beConstructedWith($client, $request, new Logger(null), 200);
     }
 
     function it_is_initializable()

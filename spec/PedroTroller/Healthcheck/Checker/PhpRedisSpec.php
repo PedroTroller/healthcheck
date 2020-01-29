@@ -6,6 +6,7 @@ namespace spec\PedroTroller\Healthcheck\Checker;
 
 use Exception;
 use PedroTroller\Healthcheck\Checker;
+use PedroTroller\Healthcheck\Logger;
 use PhpSpec\ObjectBehavior;
 use Predis\Client;
 
@@ -13,7 +14,7 @@ class PhpRedisSpec extends ObjectBehavior
 {
     function let(Client $predis)
     {
-        $this->beConstructedWith($predis);
+        $this->beConstructedWith($predis, new Logger(null));
     }
 
     function it_is_initializable()
@@ -38,7 +39,7 @@ class PhpRedisSpec extends ObjectBehavior
 
     function it_is_excluded_if_there_is_no_predis_available()
     {
-        $this->beConstructedWith(null);
+        $this->beConstructedWith(null, new Logger(null));
 
         $this->check()->shouldReturn(Checker::STATUS_EXCLUDED);
     }

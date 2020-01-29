@@ -6,13 +6,14 @@ namespace spec\PedroTroller\Healthcheck\Checker;
 
 use Elasticsearch\Client;
 use PedroTroller\Healthcheck\Checker;
+use PedroTroller\Healthcheck\Logger;
 use PhpSpec\ObjectBehavior;
 
 class ElasticsearchSpec extends ObjectBehavior
 {
     function let(Client $elasticsearch)
     {
-        $this->beConstructedWith($elasticsearch);
+        $this->beConstructedWith($elasticsearch, new Logger(null));
     }
 
     function it_is_initializable()
@@ -37,7 +38,7 @@ class ElasticsearchSpec extends ObjectBehavior
 
     function it_is_excluded_if_there_is_no_elasticsearch_available()
     {
-        $this->beConstructedWith(null);
+        $this->beConstructedWith(null, new Logger(null));
 
         $this->check()->shouldReturn(Checker::STATUS_EXCLUDED);
     }
