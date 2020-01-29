@@ -10,17 +10,17 @@
     ],
     "license": "MIT",
     "require": {
-        "symfony/console": "~4.0"
+        "symfony/console": "~4.0|^5.0"
     },
     "require-dev": {
         "doctrine/dbal": "~2.0",
         "elasticsearch/elasticsearch": "~7.0",
-        "symfony/http-foundation": "~4.0",
+        "symfony/http-foundation": "~4.0|~5.0",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.0",
-        "symfony/http-kernel": "^4.3",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/config": "^4.3",
+        "symfony/http-kernel": "^4.0|^5.0",
+        "symfony/dependency-injection": "^4.0|^5.0",
+        "symfony/config": "^4.0|^5.0",
         "predis/predis": "^1.1",
         "pedrotroller/php-cs-custom-fixer": "^2.18",
         "monolog/monolog": "^1.24",
